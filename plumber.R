@@ -29,7 +29,7 @@ cors <- function(req, res) {
 #* @serializer unboxedJSON
 #* @post /simulate
 function (req, res) {
-    body = req$body = req$argsBody,
+    body = req$body
     
    if (length(body) != 7) {
     msg <- str_interp("Invalid request body")

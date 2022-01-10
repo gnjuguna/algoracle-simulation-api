@@ -29,8 +29,8 @@ cors <- function(req, res) {
 #* @serializer unboxedJSON
 #* @post /simulate
 function (req, res) {
-    body = req$body
-    print(body);
+    body = req$body = req$argsBody,
+    
    if (length(body) != 7) {
     msg <- str_interp("Invalid request body")
     res$status <- 400 # Bad request
@@ -74,13 +74,13 @@ function (req, res) {
   }
 
  simulation <- oracle_simulation(
-     as.double(body$n_feeds),
-     as.double(body$deposit_average),
-     as.double(body$deposit_spread),
-     as.double(body$feed_average),
-     as.double(body$feed_spread),
-     as.double(body$acc_MAD),
-     as.double(body$sc_fee)
+     body$n_feeds,
+     body$deposit_average,
+     body$deposit_spread,
+     body$feed_average,
+     body$feed_spread,
+     body$acc_MAD,
+     body$sc_fee
  )
 
  return (simulation)

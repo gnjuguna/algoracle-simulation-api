@@ -74,13 +74,13 @@ function (req, res) {
   }
 
  simulation <- oracle_simulation(
-     as.numeric(body$n_feeds),
-     as.numeric(body$deposit_average),
-     as.numeric(body$deposit_spread),
-     as.numeric(body$feed_average),
-     as.numeric(body$feed_spread),
-     as.numeric(body$acc_MAD),
-     as.numeric(body$sc_fee)
+     as.double(body$n_feeds),
+     as.double(body$deposit_average),
+     as.double(body$deposit_spread),
+     as.double(body$feed_average),
+     as.double(body$feed_spread),
+     as.double(body$acc_MAD),
+     as.double(body$sc_fee)
  )
 
  return (simulation)

@@ -31,7 +31,9 @@ cors <- function(req, res) {
 #* @post /simulate
 function (req, res) {
     body = req$body
+    formBody <- mime::parse_form(req);
     print(body)
+    print(formBody)
    if (length(body) != 7) {
     msg <- str_interp("Invalid request body")
     res$status <- 400 # Bad request

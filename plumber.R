@@ -30,11 +30,11 @@ cors <- function(req, res) {
 #* @parser form
 #* @post /simulate
 function (req, res) {
+    print(req$postBody)
+    print(req$body)
     body = req$body
-    bodyParsed <- plumber::req_body_parser(req)
-    print(bodyParsed)
-    jsonBody <- tryCatch(jsonlite::parse_json(req$postBody, simplifyVector = TRUE), error = function(e) NULL)
-    formBody <- tryCatch(jsonlite::parse_form(req$postBody, simplifyVector = TRUE), error = function(e) NULL)
+    jsonBody <- tryCatch(jsonlite::parse_json(req$postBody), error = function(e) NULL)
+    formBody <- tryCatch(jsonlite::parse_form(req$postBody), error = function(e) NULL)
    
     print(formBody)
    if (length(body) != 7) {

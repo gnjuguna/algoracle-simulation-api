@@ -31,7 +31,8 @@ cors <- function(req, res) {
 #* @post /simulate
 function (req, res) {
     body = req$body
-    formBody <- parse_form(req)
+    jsonBody <- tryCatch(jsonlite::parse_json(req$postBody, simplifyVector = TRUE), error = function(e) NULL)
+    formBody <- tryCatch(jsonlite::parse_form(req$postBody, simplifyVector = TRUE), error = function(e) NULL)
     print(body)
     print(formBody)
    if (length(body) != 7) {

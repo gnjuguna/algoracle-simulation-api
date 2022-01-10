@@ -11,10 +11,8 @@ library(plumber)
 library(stringr)
 #* @filter cors
 cors <- function(req, res) {
-  print("cors filter")
   res$setHeader("Access-Control-Allow-Origin", "*") # Or whatever
   res$setHeader("Access-Control-Allow-Methods",'POST')
-  res$setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With")
   if (req$REQUEST_METHOD == "OPTIONS") {
     res$setHeader("Access-Control-Allow-Methods","*")
     res$setHeader("Access-Control-Allow-Headers", req$HTTP_ACCESS_CONTROL_REQUEST_HEADERS)
@@ -26,14 +24,10 @@ cors <- function(req, res) {
 }
 
 #* Submit Simulation Inputs
-#* @parser json
-#* @parser form
 #* @post /simulate
 function (req, res) {
-    print(req$postBody)
-    # body = req$body
-    body <- tryCatch(jsonlite::fromJSON(req$postBody), error = function(e) NULL)
-    print(body)
+   body = req$body
+   print(body)
    if (length(body) != 7) {
     msg <- str_interp("Invalid request body")
     res$status <- 400 # Bad request
@@ -88,4 +82,3 @@ function (req, res) {
 
  return (simulation)
 }
-

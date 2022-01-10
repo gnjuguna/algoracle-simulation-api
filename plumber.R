@@ -13,7 +13,7 @@ library(stringr)
 cors <- function(req, res) {
   print("cors filter")
   res$setHeader("Access-Control-Allow-Origin", "*") # Or whatever
-  res$setHeader("Access-Control-Allow-Methods",'POST, GET, OPTIONS')
+  res$setHeader("Access-Control-Allow-Methods",'POST')
   res$setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With")
   if (req$REQUEST_METHOD == "OPTIONS") {
     res$setHeader("Access-Control-Allow-Methods","*")
@@ -82,6 +82,6 @@ function (req, res) {
      body$sc_fee
  )
 
- return (result)
+ return (simulation)
 }
 

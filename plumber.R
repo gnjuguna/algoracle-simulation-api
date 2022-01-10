@@ -26,9 +26,10 @@ cors <- function(req, res) {
 }
 
 #* Submit Simulation Inputs
+#* @parser form
 #* @post /simulate
 function (req, res) {
-    body = req$body
+    body = req$argsBody,
     
    if (length(body) != 7) {
     msg <- str_interp("Invalid request body")
@@ -73,13 +74,13 @@ function (req, res) {
   }
 
  simulation <- oracle_simulation(
-     body$n_feeds,
-     body$deposit_average,
-     body$deposit_spread,
-     body$feed_average,
-     body$feed_spread,
-     body$acc_MAD,
-     body$sc_fee
+     as.numeric(body$n_feeds),
+     as.numeric(body$deposit_average),
+     as.numeric(body$deposit_spread),
+     as.numeric(body$feed_average),
+     as.numeric(body$feed_spread),
+     as.numeric(body$acc_MAD),
+     as.numeric(body$sc_fee)
  )
 
  return (simulation)

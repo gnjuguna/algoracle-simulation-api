@@ -26,11 +26,12 @@ cors <- function(req, res) {
 }
 
 #* Submit Simulation Inputs
-#* @serializer unboxedJSON
+#* @parser json
+#* @parser form
 #* @post /simulate
 function (req, res) {
     body = req$body
-    
+    print(body)
    if (length(body) != 7) {
     msg <- str_interp("Invalid request body")
     res$status <- 400 # Bad request

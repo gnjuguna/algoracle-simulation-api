@@ -33,7 +33,7 @@ function (req, res) {
     body = req$body
     jsonBody <- tryCatch(jsonlite::parse_json(req$postBody, simplifyVector = TRUE), error = function(e) NULL)
     formBody <- tryCatch(jsonlite::parse_form(req$postBody, simplifyVector = TRUE), error = function(e) NULL)
-    print(jsonBody)
+    print(req$bodyRaw)
     print(formBody)
    if (length(body) != 7) {
     msg <- str_interp("Invalid request body")

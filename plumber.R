@@ -86,5 +86,3 @@ function (req, res) {
 
  return (simulation)
 }
-
-curl -H "Content-Type: application/json" -d "{\"n_feeds\": 100, \"deposit_average\": 10000, \"deposit_spread\": 1000, \"feed_average\": 1500, \"feed_spread\": 100, \"acc_MAD\": 100, \"sc_fee\": 30}" https://algoracle-simulation-api.herokuapp.com/simulate

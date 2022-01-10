@@ -11,8 +11,10 @@ library(plumber)
 library(stringr)
 #* @filter cors
 cors <- function(req, res) {
+  print("cors filter")
   res$setHeader("Access-Control-Allow-Origin", "*") # Or whatever
   res$setHeader("Access-Control-Allow-Methods",'POST')
+  res$setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, X-Requested-With")
   if (req$REQUEST_METHOD == "OPTIONS") {
     res$setHeader("Access-Control-Allow-Methods","*")
     res$setHeader("Access-Control-Allow-Headers", req$HTTP_ACCESS_CONTROL_REQUEST_HEADERS)
@@ -23,11 +25,13 @@ cors <- function(req, res) {
   }
 }
 
+
 #* Submit Simulation Inputs
 #* @post /simulate
+#* @parser json
+#* @parser form
 function (req, res) {
    body = req$body
-   print(body)
    if (length(body) != 7) {
     msg <- str_interp("Invalid request body")
     res$status <- 400 # Bad request
@@ -82,3 +86,5 @@ function (req, res) {
 
  return (simulation)
 }
+
+curl -H "Content-Type: application/json" -d "{\"n_feeds\": 100, \"deposit_average\": 10000, \"deposit_spread\": 1000, \"feed_average\": 1500, \"feed_spread\": 100, \"acc_MAD\": 100, \"sc_fee\": 30}" https://algoracle-simulation-api.herokuapp.com/simulate

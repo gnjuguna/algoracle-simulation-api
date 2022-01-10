@@ -31,12 +31,9 @@ cors <- function(req, res) {
 #* @post /simulate
 function (req, res) {
     print(req$postBody)
-    print(req$body)
-    body = req$body
-    jsonBody <- tryCatch(jsonlite::parse_json(req$postBody), error = function(e) NULL)
-    formBody <- tryCatch(jsonlite::parse_form(req$postBody), error = function(e) NULL)
-   
-    print(formBody)
+    # body = req$body
+    body <- tryCatch(jsonlite::fromJSON(req$postBody), error = function(e) NULL)
+    print(body)
    if (length(body) != 7) {
     msg <- str_interp("Invalid request body")
     res$status <- 400 # Bad request

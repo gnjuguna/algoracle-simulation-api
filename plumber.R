@@ -8,6 +8,7 @@
 #
 source("simulation.R")
 library(plumber)
+library(stringr)
 #* @filter cors
 cors <- function(req, res) {
   print("cors filter")
